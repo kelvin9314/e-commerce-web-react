@@ -1,13 +1,12 @@
-import React from 'react';
-import { Switch, Route, Link } from "react-router-dom";
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
 
-import './App.css';
+import './App.css'
 
-import HomePage from './pages/homepage';
-import ShopPage from './pages/shop';
+import HomePage from './pages/homepage'
+import ShopPage from './pages/shop'
 
-
-function App() {
+function App () {
   return (
     <div>
       <Switch>
@@ -15,7 +14,7 @@ function App() {
         <Route exact path='/shop' component={ShopPage} />
       </Switch>
     </div>
-  );
+  )
 }
 
-export default App; 
+export default App

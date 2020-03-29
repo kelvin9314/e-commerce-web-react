@@ -1,5 +1,5 @@
-import React from 'react';
-import './menu-item.scss';
+import React from 'react'
+import './menu-item.scss'
 
 const MenuItem = ({ title, imageUrl, size }) => (
   <div className={`${size} menu-item`}>
@@ -14,6 +14,6 @@ const MenuItem = ({ title, imageUrl, size }) => (
       <span className='subtitle'>SHOP NOW</span>
     </div>
   </div>
-);
+)
 
 export default MenuItem
