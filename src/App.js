@@ -4,10 +4,10 @@ import { withGithubPageRoute } from './lib/url-helper'
 
 import './App.css'
 
-import Header from './components/header'
-import HomePage from './pages/homepage'
-import ShopPage from './pages/shop'
-import SignInAndSignUp from './pages/sign-in-and-sign-up'
+import Header from './components/header/header.component'
+import HomePage from './pages/homepage/homepage.component'
+import ShopPage from './pages/shop/shop.component'
+import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component'
 
 console.log(process.env.REACT_APP_API_TOKEN)
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-import FormInput from '../form-input'
-import CustomButton from '../custom-button'
+import FormInput from '../form-input/form-input.component'
+import CustomButton from '../custom-button/custom-button.component'
 
 import './sign-in.scss'
 

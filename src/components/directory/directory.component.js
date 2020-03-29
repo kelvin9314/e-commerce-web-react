@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './directory.scss'
 
-import MenuItem from '../menu-item/'
+import MenuItem from '../menu-item/menu- item.component'
 import directoryFaker from '../../fakers/directory-faker'
 
 const Directory = () => {
