@@ -1,6 +1,6 @@
 import React, { } from 'react'
 import { Link } from 'react-router-dom'
-import { withGithubPageRoute } from '../../lib/url-helper'
+import { withGithubPageRoute } from '../../lib/helpers'
 
 import { auth } from '../../firebase/firebase.utils'
 
