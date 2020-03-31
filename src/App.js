@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { withGithubPageRoute, getEnv } from './lib/helpers'
-import { auth } from './firebase/firebase.utils'
+import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 
 import './App.css'
 
@@ -15,15 +15,28 @@ const App = () => {
   const [unsubscribeFromAuth, setUnsubscribeFromAuth] = useState(null)
 
   useEffect(() => {
-    setUnsubscribeFromAuth(() => auth.onAuthStateChanged(user => {
-      setCurrentUser(user)
-      console.log(user)
+    console.log(currentUser)
+  }, [currentUser])
+
+  useEffect(() => {
+    setUnsubscribeFromAuth(() => auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth)
+
+        userRef.onSnapshot(snapShot => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          })
+        })
+      }
     }))
     return function cleanUp () {
       unsubscribeFromAuth()
+      setCurrentUser(null)
     }
   }, [])
-  console.log(withGithubPageRoute('/'))
+
   return (
     <div>
       <Header currentUser={currentUser}/>
