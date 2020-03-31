@@ -36,6 +36,6 @@ const sections = [
     // linkUrl: 'shop/mens'
     linkUrl: 'mens'
   }
-];
+]
 
-export default sections;
+export default sections

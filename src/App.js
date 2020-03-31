@@ -1,52 +1,55 @@
-import React from 'react';
-import { Switch, Route, Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import { withGithubPageRoute, getEnv } from './lib/helpers'
+import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 
-import './App.css';
+import './App.css'
 
-import HomePage from './pages/homepage/';
+import Header from './components/header/header.component'
+import HomePage from './pages/homepage/homepage.component'
+import ShopPage from './pages/shop/shop.component'
+import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component'
 
-// const HomePage = props => {
-//   console.log(props);
-//   return (
-//     <div>
-//       {/* <Link to='/hats'>Hats</Link> */}  
-//       <button onClick={() => props.history.push('/hats')}>Hats</button>
-//       <h1> Home page</h1>
-//     </div>
-//   )
-// }
+const App = () => {
+  const [currentUser, setCurrentUser] = useState(null)
+  const [unsubscribeFromAuth, setUnsubscribeFromAuth] = useState(null)
 
-const HatsPage = props => {
-  console.log(props);
-  return (
-    <div > 
-      <h1> Hats page </h1>
-      <Link to={`${props.match.url}/13`}>To hats 13</Link>
-      <Link to={`${props.match.url}/17`}>To hats 17</Link>
-      <Link to={`${props.match.url}/21`}>To hats 21</Link>
-    </div>
-  );
-}
+  useEffect(() => {
+    console.log(currentUser)
+  }, [currentUser])
 
-const HatsDetail = props => {
-  console.log(props);
+  useEffect(() => {
+    setUnsubscribeFromAuth(() => auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth)
+
+        userRef.onSnapshot(snapShot => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          })
+        })
+      }
+    }))
+    return function cleanUp () {
+      unsubscribeFromAuth()
+      setCurrentUser(null)
+    }
+  }, [])
+
   return (
     <div>
-      <h2>Hats detail page : {props.match.params.hatsId} </h2>
+      <Header currentUser={currentUser}/>
+      <Switch>
+        <Route exact path='/e-commerce-web-react' >
+          {getEnv('NODE_ENV') !== 'production' ? <Redirect to="/" /> : <HomePage />}
+        </Route>
+        <Route exact path={withGithubPageRoute('/')} component={HomePage} />
+        <Route exact path={withGithubPageRoute('/shop')} component={ShopPage} />
+        <Route path={withGithubPageRoute('/signin')} component={SignInAndSignUp} />
+      </Switch>
     </div>
   )
 }
 
-function App() {
-  return (
-    <div>
-      <Switch>
-        <Route exact path='/' component={HomePage} />
-        <Route exact path='/hats' component={HatsPage} />
-        <Route path='/hats/:hatsId' component={HatsDetail} />
-      </Switch>
-    </div>
-  );
-}
-
-export default App; 
+export default App
