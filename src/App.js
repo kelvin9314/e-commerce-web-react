@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { withGithubPageRoute, getEnv } from './lib/helpers'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
-import { useDispatch } from 'react-redux'
-import { setCurrentUser } from './redux/user/userAction'
+import { useSelector, useDispatch } from 'react-redux'
+import { setCurrentUser } from './redux/user/user.action'
 
 import './App.css'
 
@@ -13,6 +13,7 @@ import ShopPage from './pages/shop/shop.component'
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component'
 
 const App = () => {
+  const { currentUser } = useSelector((state) => state.user)
   const dispatch = useDispatch()
   const [unsubscribeFromAuth, setUnsubscribeFromAuth] = useState(null)
 
@@ -49,7 +50,11 @@ const App = () => {
         </Route>
         <Route exact path={withGithubPageRoute('/')} component={HomePage} />
         <Route exact path={withGithubPageRoute('/shop')} component={ShopPage} />
-        <Route path={withGithubPageRoute('/signin')} component={SignInAndSignUp} />
+        <Route
+          exact
+          path={withGithubPageRoute('/signin')}
+          render={() => (currentUser ? <Redirect to="/" /> : <SignInAndSignUp />)}
+        />
       </Switch>
     </div>
   )

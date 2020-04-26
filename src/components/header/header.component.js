@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { withGithubPageRoute } from '../../lib/helpers'
-import { useSelector, useDispatch } from 'react-redux'
-import {} from '../../redux/user/userReducer'
+import { useSelector } from 'react-redux'
+import {} from '../../redux/user/user.reducer'
 
 import { auth } from '../../firebase/firebase.utils'
 
@@ -11,7 +11,6 @@ import './header.scss'
 
 const Header = (props) => {
   const { currentUser } = useSelector((state) => state.user)
-  const dispatch = useDispatch()
 
   return (
     <div className="header">
