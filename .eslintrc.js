@@ -6,7 +6,7 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'standard',
-    "plugin:prettier/recommended"
+    'plugin:prettier/recommended'
   ],
   globals: {
     Atomics: 'readonly',
@@ -24,11 +24,11 @@ module.exports = {
     'react-hooks'
   ],
   rules: {
-    "react/prop-types": 0,
+    'react/prop-types': 0,
     'react/react-in-jsx-scope': 'off',
     'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn'
+    'react-hooks/exhaustive-deps': 'warn',
   }
 }

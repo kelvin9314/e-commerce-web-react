@@ -19,19 +19,21 @@ const App = () => {
   }, [currentUser])
 
   useEffect(() => {
-    setUnsubscribeFromAuth(() => auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth)
+    setUnsubscribeFromAuth(() =>
+      auth.onAuthStateChanged(async (userAuth) => {
+        if (userAuth) {
+          const userRef = await createUserProfileDocument(userAuth)
 
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
+          userRef.onSnapshot((snapShot) => {
+            setCurrentUser({
+              id: snapShot.id,
+              ...snapShot.data(),
+            })
           })
-        })
-      }
-    }))
-    return function cleanUp () {
+        }
+      })
+    )
+    return function cleanUp() {
       unsubscribeFromAuth()
       setCurrentUser(null)
     }
@@ -39,9 +41,9 @@ const App = () => {
 
   return (
     <div>
-      <Header currentUser={currentUser}/>
+      <Header currentUser={currentUser} />
       <Switch>
-        <Route exact path='/e-commerce-web-react' >
+        <Route exact path="/e-commerce-web-react">
           {getEnv('NODE_ENV') !== 'production' ? <Redirect to="/" /> : <HomePage />}
         </Route>
         <Route exact path={withGithubPageRoute('/')} component={HomePage} />
