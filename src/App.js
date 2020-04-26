@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { withGithubPageRoute, getEnv } from './lib/helpers'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
+import { useDispatch } from 'react-redux'
+import { setCurrentUser } from './redux/user/userAction'
 
 import './App.css'
 
@@ -11,12 +13,8 @@ import ShopPage from './pages/shop/shop.component'
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component'
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(null)
+  const dispatch = useDispatch()
   const [unsubscribeFromAuth, setUnsubscribeFromAuth] = useState(null)
-
-  useEffect(() => {
-    console.log(currentUser)
-  }, [currentUser])
 
   useEffect(() => {
     setUnsubscribeFromAuth(() =>
@@ -25,23 +23,26 @@ const App = () => {
           const userRef = await createUserProfileDocument(userAuth)
 
           userRef.onSnapshot((snapShot) => {
-            setCurrentUser({
-              id: snapShot.id,
-              ...snapShot.data(),
-            })
+            dispatch(
+              setCurrentUser({
+                id: snapShot.id,
+                ...snapShot.data(),
+              })
+            )
           })
         }
+        dispatch(setCurrentUser(userAuth))
       })
     )
     return function cleanUp() {
       unsubscribeFromAuth()
-      setCurrentUser(null)
+      dispatch(setCurrentUser(null))
     }
   }, [])
 
   return (
     <div>
-      <Header currentUser={currentUser} />
+      <Header />
       <Switch>
         <Route exact path="/e-commerce-web-react">
           {getEnv('NODE_ENV') !== 'production' ? <Redirect to="/" /> : <HomePage />}
