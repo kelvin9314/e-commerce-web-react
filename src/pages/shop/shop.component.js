@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
-import collectionsFaker from '../../fakers/collections-faker'
 import CollectionPreview from '../../components/collection-preview/collection-preview.component'
 
 const ShopPage = (props) => {
-  const [collections, setCollections] = useState(collectionsFaker)
+  const { collections } = useSelector((state) => state.shop)
 
   return (
     <div className="shop-page">
