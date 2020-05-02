@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import { withGithubPageRoute, getEnv } from './lib/helpers'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 import { useSelector, useDispatch } from 'react-redux'
-import { setCurrentUser } from './redux/user/user.action'
+import { setCurrentUser } from './redux/user/user.actions'
 
 import './App.css'
 
