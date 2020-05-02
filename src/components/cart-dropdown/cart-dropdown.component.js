@@ -5,6 +5,7 @@ import { toggleCartHidden } from '../../redux/cart/cart.actions'
 
 import CustomButton from '../custom-button/custom-button.component'
 import CartItem from '../cart-item/cart-item.component'
+import { withGithubPageRoute } from '../../lib/helpers'
 
 import './cart-dropdown.style.scss'
 
@@ -23,7 +24,7 @@ const CartDropdown = ({ history }) => {
       </div>
       <CustomButton
         onClick={() => {
-          history.push('/checkout')
+          history.push(withGithubPageRoute('/checkout'))
           dispatch(toggleCartHidden())
         }}
       >
