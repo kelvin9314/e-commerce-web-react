@@ -10,7 +10,8 @@ import './App.css'
 import Header from './components/header/header.component'
 import HomePage from './pages/homepage/homepage.component'
 import ShopPage from './pages/shop/shop.component'
-import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component'
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component'
+import CheckoutPage from './pages/checkout/checkout.component'
 
 const App = () => {
   const { currentUser } = useSelector((state) => state.user)
@@ -50,10 +51,11 @@ const App = () => {
         </Route>
         <Route exact path={withGithubPageRoute('/')} component={HomePage} />
         <Route exact path={withGithubPageRoute('/shop')} component={ShopPage} />
+        <Route exact path={withGithubPageRoute('/checkout')} component={CheckoutPage} />
         <Route
           exact
           path={withGithubPageRoute('/signin')}
-          render={() => (currentUser ? <Redirect to="/" /> : <SignInAndSignUp />)}
+          render={() => (currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />)}
         />
       </Switch>
     </div>
