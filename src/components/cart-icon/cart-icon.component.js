@@ -6,12 +6,13 @@ import { ReactComponent as ShoppingIcon } from '../../assets/icons/shopping-bag.
 import './cart-icon.scss'
 
 const CartIcon = () => {
+  const itemCount = useSelector((state) => state.cart.cartItems.reduce((acc, curr) => acc + curr.quantity, 0))
   const dispatch = useDispatch()
 
   return (
     <div className="cart-icon" onClick={() => dispatch(toggleCartHidden())}>
       <ShoppingIcon className="shopping-icon" />
-      <span className="item-count">0</span>
+      <span className="item-count">{itemCount} </span>
     </div>
   )
 }
