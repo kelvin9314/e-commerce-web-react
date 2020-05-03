@@ -4,7 +4,6 @@
   "private": true,
   "keywords": [],
   "license": "MIT",
-  "homepage": "https://kelvin9314.github.io/e-commerce-web-react",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

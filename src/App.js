@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { withGithubPageRoute, getEnv } from './lib/helpers'
+import { getEnv } from './lib/helpers'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.actions'
@@ -49,14 +49,10 @@ const App = () => {
         <Route exact path="/e-commerce-web-react">
           {getEnv('NODE_ENV') !== 'production' ? <Redirect to="/" /> : <HomePage />}
         </Route>
-        <Route exact path={withGithubPageRoute('/')} component={HomePage} />
-        <Route path={withGithubPageRoute('/shop')} component={ShopPage} />
-        <Route exact path={withGithubPageRoute('/checkout')} component={CheckoutPage} />
-        <Route
-          exact
-          path={withGithubPageRoute('/signin')}
-          render={() => (currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />)}
-        />
+        <Route exact path={'/'} component={HomePage} />
+        <Route path={'/shop'} component={ShopPage} />
+        <Route exact path={'/checkout'} component={CheckoutPage} />
+        <Route exact path={'/signin'} render={() => (currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />)} />
       </Switch>
     </div>
   )

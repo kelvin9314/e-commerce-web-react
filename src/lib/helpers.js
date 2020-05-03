@@ -2,6 +2,7 @@ export const getEnv = (keyName, defaultValue = '') => {
   return process.env[keyName] || defaultValue
 }
 
+//  use it when deploy on github page only
 export const withGithubPageRoute = (restOfRoute) => {
   let result = ''
   // console.log(getEnv('NODE_ENV'))
