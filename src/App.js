@@ -50,7 +50,7 @@ const App = () => {
           {getEnv('NODE_ENV') !== 'production' ? <Redirect to="/" /> : <HomePage />}
         </Route>
         <Route exact path={withGithubPageRoute('/')} component={HomePage} />
-        <Route exact path={withGithubPageRoute('/shop')} component={ShopPage} />
+        <Route path={withGithubPageRoute('/shop')} component={ShopPage} />
         <Route exact path={withGithubPageRoute('/checkout')} component={CheckoutPage} />
         <Route
           exact
