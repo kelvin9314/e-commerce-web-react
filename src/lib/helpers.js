@@ -2,7 +2,7 @@ export const getEnv = (keyName, defaultValue = '') => {
   return process.env[keyName] || defaultValue
 }
 
-export const withGithubPageRoute = restOfRoute => {
+export const withGithubPageRoute = (restOfRoute) => {
   let result = ''
   // console.log(getEnv('NODE_ENV'))
   switch (getEnv('NODE_ENV')) {

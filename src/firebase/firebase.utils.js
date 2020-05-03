@@ -9,7 +9,7 @@ const CONFIG = {
   projectId: 'newagent-1-mnpitm',
   storageBucket: 'newagent-1-mnpitm.appspot.com',
   messagingSenderId: '1083037953998',
-  appId: '1:1083037953998:web:89aa0555616b014dda459f'
+  appId: '1:1083037953998:web:89aa0555616b014dda459f',
 }
 
 firebase.initializeApp(CONFIG)
@@ -29,7 +29,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       })
     } catch (err) {
       console.log('error creating user', err.message)

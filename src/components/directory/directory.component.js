@@ -1,19 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './directory.scss'
 
+import { useSelector } from 'react-redux'
 import MenuItem from '../menu-item/menu- item.component'
-import directoryFaker from '../../fakers/directory-faker'
 
 const Directory = () => {
-  const [sections, setSections] = useState(directoryFaker)
-
+  const sections = useSelector((state) => state.directory)
   return (
     <div className="directory-menu">
-      {
-        sections.map(({ id, ...otherSectionProps }) => (
-          <MenuItem key={id} {...otherSectionProps} />
-        ))
-      }
+      {sections.map(({ id, ...otherSectionProps }) => (
+        <MenuItem key={id} {...otherSectionProps} />
+      ))}
     </div>
   )
 }
