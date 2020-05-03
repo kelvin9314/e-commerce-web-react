@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Route } from 'react-router-dom'
+import CollectionsOverview from '../../components/collections-overview/collections-overview.component'
+import CollectionPage from '../collection/collection.component'
 
-import collectionsFaker from '../../fakers/collections-faker'
-import CollectionPreview from '../../components/collection-preview/collection-preview.component'
-
-const ShopPage = props => {
-  const [collections, setCollections] = useState(collectionsFaker)
-
+// using match makes it more flexible if we want to reuse it in another place
+const ShopPage = ({ match }) => {
   return (
-    <div className='shop-page'>
-      {collections.map(({ id, ...otherCollectionProps }) => (
-        <CollectionPreview key={id} {...otherCollectionProps} />
-      ))}
+    <div className="shop-page">
+      <Route exact path={`${match.path}`} component={CollectionsOverview} />
+      {/*  NOTE nested Route */}
+      <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
     </div>
   )
 }
