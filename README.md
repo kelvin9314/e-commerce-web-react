@@ -2,5 +2,6 @@
 
 - React
 - styled-components
-- Redux
 - firebase
+- Redux
+- Redux-thunk
