@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { getEnv } from './lib/helpers'
-import { auth, createUserProfileDocument } from './firebase/firebase.utils'
+import { auth, createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.actions'
 
@@ -15,6 +15,9 @@ import CheckoutPage from './pages/checkout/checkout.component'
 
 const App = () => {
   const { currentUser } = useSelector((state) => state.user)
+  // const collectionsArr = useSelector((state) =>
+  //   Object.keys(state.shop.collections).map((key) => state.shop.collections[key])
+  // )
   const dispatch = useDispatch()
   const [unsubscribeFromAuth, setUnsubscribeFromAuth] = useState(null)
 
@@ -34,6 +37,10 @@ const App = () => {
           })
         }
         dispatch(setCurrentUser(userAuth))
+        // addCollectionAndDocuments(
+        //   'collections',
+        //   collectionsArr.map(({ title, items }) => ({ title, items }))
+        // )
       })
     )
     return function cleanUp() {

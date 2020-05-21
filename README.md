@@ -1,4 +1,7 @@
 # A Simple e-commerce web
+
 - React
-- Redux
+- styled-components
 - firebase
+- Redux
+- Redux-thunk
