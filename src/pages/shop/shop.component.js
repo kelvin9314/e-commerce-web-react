@@ -2,7 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions'
+import { fetchCollectionsStart } from '../../redux/shop/shop.actions'
 
 import CollectionsOverview from '../../components/collections-overview/collections-overview.component'
 import CollectionPage from '../collection/collection.component'
@@ -19,7 +19,7 @@ const ShopPage = ({ match }) => {
   const dispatch = useDispatch()
 
   React.useEffect(() => {
-    dispatch(fetchCollectionsStartAsync())
+    dispatch(fetchCollectionsStart())
   }, [])
 
   return (
